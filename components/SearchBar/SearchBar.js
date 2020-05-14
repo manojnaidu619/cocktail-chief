@@ -1,10 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { View, StyleSheet, Text, Button, TextInput } from 'react-native'
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+    const [searchVal, changeSearchVal] = useState()
+
+    const onPressHandler = () => {
+        props.getSearchTerm(searchVal)
+    }
+
     return (
-        <View>
-            <TextInput style={styles.inputField} placeholder="Search for drink / Type first letter"/>
+        <View style={styles.searchBarView}>
+            <TextInput style={styles.inputField} placeholder="Search for drink / Type first letter" onChangeText={text => changeSearchVal(text)} value={searchVal}/>
+            <Button title="Search" onPress={onPressHandler}/>
         </View>
     )
 }
@@ -12,12 +19,15 @@ const SearchBar = () => {
 const styles = StyleSheet.create({
     searchBarView: {
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     inputField: {
         borderBottomColor: '#ccc',
         borderBottomWidth: 2,
-        padding: 5
+        padding: 5,
+        width: '80%'
     }
 })
 
