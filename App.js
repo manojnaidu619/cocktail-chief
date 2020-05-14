@@ -1,21 +1,18 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import SearchBar from './components/SearchBar/SearchBar'
+import { StyleSheet, View, Text } from 'react-native'
+import SearchBar from './components/Search/SearchBar'
 
-export default function App() {
-
+const App = () => {
   const [searchTerm, changeSearchTerm] = useState(null)
-
   const getSearchTerm = value => {
     changeSearchTerm(value)
   }
-
   return (
     <View style={styles.container}>
       <SearchBar getSearchTerm={getSearchTerm} />
       <Text>{searchTerm}</Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -25,5 +22,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingTop: 50
   }
+})
 
-});
+export default App
