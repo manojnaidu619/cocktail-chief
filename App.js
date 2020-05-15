@@ -12,6 +12,7 @@ const App = () => {
   const [drinks, setDrinks] = useState(null)
   const [loading, setLoading] = useState(true)
   const [modalStatus, setModalStatus] = useState(false)
+  const [filterModal, setFilterModal] = useState(false)
   const [drinkId, setDrinkId] = useState(null)
 
   const getSearchTerm = value => {
@@ -21,6 +22,10 @@ const App = () => {
     } else {
       requestHandler()
     }
+  }
+
+  const FilterModalHandler = () => {
+    setFilterModal(true)
   }
 
   const pressHandler = (item) => {
@@ -45,12 +50,18 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <SearchBar getSearchTerm={getSearchTerm} />
+      <SearchBar getSearchTerm={getSearchTerm} filterModal={FilterModalHandler} />
       {
         !loading ?
         (FlatListResolver(searchTerm, drinks, pressHandler)) :
         <Text>Loading data!</Text>
       }
+      <Modal visible={filterModal}
+        onRequestClose={() => setFilterModal(false)}
+        animationType='slide-down'>
+        <Text>Sample Filter Modal</Text>
+      </Modal>
+
       <Modal visible={modalStatus}
         onRequestClose={() => setModalStatus(false)}
         animationType='slide-down'>
