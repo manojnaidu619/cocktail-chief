@@ -52,9 +52,10 @@ const App = () => {
           numColumns='2'
           key='2'
       />
-      <Modal visible={modalStatus}>
-        <DrinkInfo drinkId={drinkId} />
-        <Text onPress={()=>setModalStatus(false)}>Close</Text>
+      <Modal visible={modalStatus}
+        onRequestClose={() => setModalStatus(false)}
+        animationType='slide-down'>
+          <DrinkInfo drinkId={drinkId} />
       </Modal>
     </View> 
   ) 

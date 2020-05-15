@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 
 const DrinkInfo = ({ info }) => {
     const [ingredients, setIngredients] = useState([])
-
+    console.log(info)
     useEffect(() => {
         let newArray = []
         for (let i = 1; i <= 15; i++) {
@@ -27,17 +27,18 @@ const DrinkInfo = ({ info }) => {
             <Text>Is it Alchoholic? : {info["strAlcoholic"] === 'Alcoholic' ? 'Yes' : "No"}</Text>
             <Text>Category : {info["strCategory"]}</Text>
             <Text>Glass : {info["strGlass"]}</Text>
-            <Text>{info["strInstructions"]}</Text>
             <Text>Ingredients : </Text>
             {
                 ingredients.map((ing, index) => <Text key={index}>{ing},</Text>)
             }
+            <Text>{info["strInstructions"]}</Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     modalContainer: {
+        display: 'flex',
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',

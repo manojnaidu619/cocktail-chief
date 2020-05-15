@@ -17,7 +17,7 @@ const DrinkModal = (props) => {
         })
     }, [])
     
-    return (drinkInfo ? <DrinkInfo info={drinkInfo}/> : <Text>loading!</Text>)
+    return (drinkInfo ? <DrinkInfo info={drinkInfo}/> : <Text style={styles.modalContainer}>loading!</Text>)
     
 }
 
