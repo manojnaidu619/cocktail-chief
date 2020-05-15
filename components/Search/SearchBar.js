@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { View, StyleSheet, Text, Button, TextInput } from 'react-native'
+import { View, StyleSheet, Button, TextInput, TouchableOpacity } from 'react-native'
 
 const SearchBar = (props) => {
     const [searchVal, changeSearchVal] = useState()
@@ -9,10 +9,12 @@ const SearchBar = (props) => {
     }
 
     return (
-        <View style={styles.searchBarView}>
-            <TextInput style={styles.inputField} placeholder="Search for drink / Type first letter" onChangeText={text => changeSearchVal(text)} value={searchVal}/>
-            <Button title="Search" onPress={onPressHandler}/>
-        </View>
+        <TouchableOpacity>
+            <View style={styles.searchBarView}>
+                <TextInput style={styles.inputField} placeholder="Search for drink / Type first letter" onChangeText={text => changeSearchVal(text)} value={searchVal}/>
+                <Button title="Search" onPress={onPressHandler}/>
+            </View>
+        </TouchableOpacity>
     )
 }
 
