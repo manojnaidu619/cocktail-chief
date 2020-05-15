@@ -4,7 +4,7 @@ import { Text, View, Image, StyleSheet } from 'react-native'
 
 const DrinkCard = ({ drink }) => {
     return (
-        <View style={styles.card}>
+        <View>
             <Image source={{uri: drink['strDrinkThumb']}} style={{width: 175, height: 175}}></Image>
             <View><DrinkInfo drink={drink}/></View>
         </View>
