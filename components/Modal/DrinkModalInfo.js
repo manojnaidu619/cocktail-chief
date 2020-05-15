@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 
 const DrinkInfo = ({ info }) => {
     const [ingredients, setIngredients] = useState([])
-    console.log(info)
     useEffect(() => {
         let newArray = []
         for (let i = 1; i <= 15; i++) {

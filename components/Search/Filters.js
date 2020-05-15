@@ -2,11 +2,11 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
-const Filters = () => {
+const Filters = ({natureFilter, categoryFilter}) => {
     const nature = [
         { label: 'Alcoholic', value: 'Alcoholic' },
         { label: 'Non Alcoholic', value: 'Non_Alcoholic' },
-        { label: 'Both', value: 'Both', isSelected: true}
+        { label: 'Both', value: 'Both'}
     ]
 
     const category = [
@@ -30,13 +30,13 @@ const Filters = () => {
           <RadioForm
             radio_props={nature}
             initial={2}
-            onPress={(value) => console.log(value)}
+            onPress={(value) => natureFilter(value)}
             />
             <Text>Category</Text>
           <RadioForm
             radio_props={category}
             initial={11}
-            onPress={(value) => console.log(value)}
+            onPress={(value) => categoryFilter(value)}
           />
         </View>
       );

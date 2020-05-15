@@ -15,26 +15,27 @@ const App = () => {
   const [modalStatus, setModalStatus] = useState(false)
   const [filterModal, setFilterModal] = useState(false)
   const [drinkId, setDrinkId] = useState(null)
+  const [filters, changeFilters] = useState(['Both','All'])
 
   const getSearchTerm = value => {
     changeSearchTerm(value)
     if (value.toString().length > 0) {
-      requestHandler(searchTerm)
+      requestHandler([,,searchTerm])
     } else {
-      requestHandler()
+      requestHandler(filters)
     }
   }
 
-  const FilterModalHandler = () => {
-    setFilterModal(true)
-  }
+  const FilterModalHandler = () => setFilterModal(true)
+  const FilterNatureHandler = newData => changeFilters([newData, filters[1]])
+  const FilterCategoryHandler = newData => changeFilters([filters[0], newData])
 
   const pressHandler = (item) => {
     setDrinkId(item["idDrink"])
     setModalStatus(true)
   }
 
-  const requestHandler = (term=null) => {
+  const requestHandler = (term=filters) => {
     HomeRequestHandler(term).then(axios.spread((req1, req2) => {
       const reqOne = req1["data"]["drinks"]
       const reqTwo = req2["data"]["drinks"]
@@ -45,8 +46,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log("inside")
-    requestHandler("mixed")
+    requestHandler(filters)
   }, [])
 
   return (
@@ -60,7 +60,7 @@ const App = () => {
       <Modal visible={filterModal}
         onRequestClose={() => setFilterModal(false)}
         animationType='slide-down'>
-        <Filter/>
+        <Filter natureFilter={FilterNatureHandler} categoryFilter={FilterCategoryHandler}/>
       </Modal>
 
       <Modal visible={modalStatus}
