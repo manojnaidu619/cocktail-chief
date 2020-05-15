@@ -1,7 +1,6 @@
 import React from 'react'
 import DrinkCard from '../Cards/DrinkCard'
 import { View, FlatList, TouchableOpacity, StyleSheet } from 'react-native'
-import SearchRequest from '../Request/SearchRequest'
 
 const FlatListResolver = (searchTerm, drinks, pressHandler) => {
 

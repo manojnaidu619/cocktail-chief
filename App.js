@@ -6,6 +6,7 @@ import axios from 'axios'
 import Shuffler from './components/utils/ArrayShuffler'
 import DrinkInfo from './components/Modal/DrinkModal'
 import FlatListResolver from './components/utils/FlatListResolver'
+import Filter from './components/Search/Filters'
 
 const App = () => {
   const [searchTerm, changeSearchTerm] = useState(null)
@@ -45,7 +46,7 @@ const App = () => {
 
   useEffect(() => {
     console.log("inside")
-    requestHandler()
+    requestHandler("mixed")
   }, [])
 
   return (
@@ -59,7 +60,7 @@ const App = () => {
       <Modal visible={filterModal}
         onRequestClose={() => setFilterModal(false)}
         animationType='slide-down'>
-        <Text>Sample Filter Modal</Text>
+        <Filter/>
       </Modal>
 
       <Modal visible={modalStatus}
