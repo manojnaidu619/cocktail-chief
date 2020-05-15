@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
         borderBottomColor: '#ccc',
         borderBottomWidth: 2,
         padding: 5,
-        width: '80%'
+        width: '80%',
+        marginBottom: 30
     }
 })
 
