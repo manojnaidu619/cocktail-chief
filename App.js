@@ -1,17 +1,25 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native'
+import { StyleSheet, View, Text, FlatList, TouchableOpacity, Modal } from 'react-native'
 import SearchBar from './components/Search/SearchBar'
 import HomeRequestHandler from './components/Request/HomeRequestHandler'
 import DrinkCard from './components/Cards/DrinkCard'
 import axios from 'axios'
 import Shuffler from './components/utils/ArrayShuffler'
+import DrinkInfo from './components/Modal/DrinkModal'
 
 const App = () => {
   const [searchTerm, changeSearchTerm] = useState(null)
   const [drinks, setDrinks] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [modalStatus, setModalStatus] = useState(false)
+  const [drinkId, setDrinkId] = useState(null)
 
   const getSearchTerm = value => changeSearchTerm(value)
+
+  const pressHandler = (item) => {
+    setDrinkId(item["idDrink"])
+    setModalStatus(true)
+  }
 
   useEffect(() => {
     HomeRequestHandler().then(axios.spread((req1, req2) => {
@@ -22,18 +30,32 @@ const App = () => {
     }))
   }, [])
 
+  const renderItem = ({ item }) => { 
+    return (
+      <View>
+        <TouchableOpacity onPress={() => pressHandler(item)}>
+          <DrinkCard drink={item} key={item["idDrink"]} />
+        </TouchableOpacity>
+      </View>
+      )
+  }
+
   return (
     <View style={styles.container}>
       <SearchBar getSearchTerm={getSearchTerm} />
       <Text>{searchTerm}</Text>
         <FlatList
           data={drinks}
-          renderItem={({ item }) => <DrinkCard drink={item} key={item["idDrink"]} />}
+          renderItem={renderItem}
           keyExtractor={item => item["idDrink"]}
           contentContainerStyle={styles.cardsContainer}
           numColumns='2'
           key='2'
-        />
+      />
+      <Modal visible={modalStatus}>
+        <DrinkInfo drinkId={drinkId} />
+        <Text onPress={()=>setModalStatus(false)}>Close</Text>
+      </Modal>
     </View> 
   ) 
 }
