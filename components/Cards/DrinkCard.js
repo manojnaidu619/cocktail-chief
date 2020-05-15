@@ -1,12 +1,13 @@
 import React from 'react'
-import DrinkInfo from './DrinkInfo'
 import { Text, View, Image, StyleSheet } from 'react-native'
 
 const DrinkCard = ({ drink }) => {
     return (
         <View style={styles.card}>
-            <Image source={{uri: drink['strDrinkThumb']}} style={{width: 175, height: 175}}></Image>
-            <View><DrinkInfo drink={drink}/></View>
+            <Image source={{ uri: drink['strDrinkThumb'] }} style={{ width: 175, height: 175 }}></Image>
+            <View style={styles.infoDiv}>
+                <Text style={{flex: 1}}>{drink["strDrink"]}</Text>
+            </View>
         </View>
     )
 }
@@ -20,6 +21,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 2,
         padding: 5
+    },
+    infoDiv: {
+        flexDirection: 'row',
+        padding: 10
     }
 })
 

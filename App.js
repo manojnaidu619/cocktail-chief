@@ -6,6 +6,7 @@ import DrinkCard from './components/Cards/DrinkCard'
 import axios from 'axios'
 import Shuffler from './components/utils/ArrayShuffler'
 import DrinkInfo from './components/Modal/DrinkModal'
+import FlatListResolver from './components/utils/FlatListResolver'
 
 const App = () => {
   const [searchTerm, changeSearchTerm] = useState(null)
@@ -27,31 +28,38 @@ const App = () => {
       const reqTwo = req2["data"]["drinks"]
       let mergedReq = reqOne.concat(reqTwo)
       setDrinks(Shuffler(mergedReq))
+      setLoading(false)
     }))
   }, [])
 
-  const renderItem = ({ item }) => { 
-    return (
-      <View>
-        <TouchableOpacity onPress={() => pressHandler(item)}>
-          <DrinkCard drink={item} key={item["idDrink"]} />
-        </TouchableOpacity>
-      </View>
-      )
-  }
+  // const renderItem = ({ item }) => { 
+  //   return (
+  //     <View>
+  //       <TouchableOpacity onPress={() => pressHandler(item)}>
+  //         <DrinkCard drink={item} key={item["idDrink"]} />
+  //       </TouchableOpacity>
+  //     </View>
+  //     )
+  // }
 
   return (
     <View style={styles.container}>
       <SearchBar getSearchTerm={getSearchTerm} />
       <Text>{searchTerm}</Text>
-        <FlatList
-          data={drinks}
-          renderItem={renderItem}
-          keyExtractor={item => item["idDrink"]}
-          contentContainerStyle={styles.cardsContainer}
-          numColumns='2'
-          key='2'
-      />
+      {
+        !loading ?
+        // <FlatList
+        //   data={drinks}
+        //   renderItem={renderItem}
+        //   keyExtractor={item => item["idDrink"]}
+        //   contentContainerStyle={styles.cardsContainer}
+        //   numColumns='2'
+        //   key='2'
+        //   /> :
+        FlatListResolver(searchTerm, drinks, pressHandler) :
+        <Text>Loading data!</Text>
+      }
+        
       <Modal visible={modalStatus}
         onRequestClose={() => setModalStatus(false)}
         animationType='slide-down'>
@@ -75,9 +83,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 5,
-    borderColor: 'red',
-    borderWidth: 2
+    padding: 5
   }
 })
 
