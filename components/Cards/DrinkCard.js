@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginBottom: 30,
         borderColor: '#ccc',
-        borderRadius: 5,
-        borderWidth: 2,
+        borderRadius: 3,
+        borderWidth: 1,
         padding: 5
     },
     infoDiv: {

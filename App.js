@@ -46,10 +46,12 @@ const App = () => {
   const requestHandler = (term = filters) => {
     HomeRequestHandler(term).then(axios.spread((req1, req2) => {
       const reqOne = req1["data"]["drinks"]
-      if (req2) {
+      if (req2 !== undefined && req2 !== null) {
         const reqTwo = req2["data"]["drinks"]
-        let mergedReq = reqOne.concat(reqTwo)
-        setDrinks(Shuffler(mergedReq))
+        if (typeof(req2) === 'object' && typeof(req1) === 'object') {
+          let mergedReq = reqOne.concat(reqTwo)
+           setDrinks(Shuffler(mergedReq))
+        } 
       } else {
         setDrinks(Shuffler(reqOne))
       }
