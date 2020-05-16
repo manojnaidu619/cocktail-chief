@@ -13,6 +13,16 @@ const HomeRequestHandler = term => {
       axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`)
     ])
   }
+  else if (nature === 'Alcoholic') {
+    return axios.all([
+      axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic`)
+    ])
+  }
+  else if (nature === 'Non_Alcoholic') {
+    return axios.all([
+      axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic`)
+    ])
+  }
   else if(term[2]) {
     let searchTerm = term[2].toLowerCase()
     return axios.all([
