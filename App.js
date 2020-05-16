@@ -18,29 +18,41 @@ const App = () => {
   const [filters, changeFilters] = useState(['Both','All'])
 
   const getSearchTerm = value => {
-    changeSearchTerm(value)
     if (value.toString().length > 0) {
-      requestHandler([,,searchTerm])
+      requestHandler([null,null, value.toString()])
     } else {
       requestHandler(filters)
     }
   }
 
   const FilterModalHandler = () => setFilterModal(true)
-  const FilterNatureHandler = newData => changeFilters([newData, filters[1]])
-  const FilterCategoryHandler = newData => changeFilters([filters[0], newData])
+
+  const FilterNatureHandler = newData => {
+    const newArray = [newData, filters[1]]
+    requestHandler(newArray)
+    changeFilters(newArray)
+  }
+  const FilterCategoryHandler = newData => {
+    const newArray = [filters[0], newData]
+    requestHandler(newArray)
+    changeFilters(newArray)
+  }
 
   const pressHandler = (item) => {
     setDrinkId(item["idDrink"])
     setModalStatus(true)
   }
 
-  const requestHandler = (term=filters) => {
+  const requestHandler = (term = filters) => {
     HomeRequestHandler(term).then(axios.spread((req1, req2) => {
       const reqOne = req1["data"]["drinks"]
-      const reqTwo = req2["data"]["drinks"]
-      let mergedReq = reqOne.concat(reqTwo)
-      setDrinks(Shuffler(mergedReq))
+      if (req2) {
+        const reqTwo = req2["data"]["drinks"]
+        let mergedReq = reqOne.concat(reqTwo)
+        setDrinks(Shuffler(mergedReq))
+      } else {
+        setDrinks(Shuffler(reqOne))
+      }
       setLoading(false)
     }))
   }
@@ -54,13 +66,13 @@ const App = () => {
       <SearchBar getSearchTerm={getSearchTerm} filterModal={FilterModalHandler} />
       {
         !loading ?
-        (FlatListResolver(searchTerm, drinks, pressHandler)) :
+        (FlatListResolver(searchTerm, drinks, filters, pressHandler)) :
         <Text>Loading data!</Text>
       }
       <Modal visible={filterModal}
         onRequestClose={() => setFilterModal(false)}
         animationType='slide-down'>
-        <Filter natureFilter={FilterNatureHandler} categoryFilter={FilterCategoryHandler}/>
+        <Filter natureFilter={FilterNatureHandler} categoryFilter={FilterCategoryHandler} categorySelected={filters[1]} natureSelected={filters[0]}/>
       </Modal>
 
       <Modal visible={modalStatus}
@@ -69,7 +81,7 @@ const App = () => {
           <DrinkInfo drinkId={drinkId} />
       </Modal>
     </View> 
-  ) 
+  )  
 }
 
 

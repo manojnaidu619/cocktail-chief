@@ -1,9 +1,11 @@
 import React from 'react'
 import DrinkCard from '../Cards/DrinkCard'
 import { View, FlatList, TouchableOpacity, StyleSheet } from 'react-native'
+import axios from 'axios'
 
-const FlatListResolver = (searchTerm, drinks, pressHandler) => {
-
+const FlatListResolver = (searchTerm, drinks, filters, pressHandler) => {
+    let filteredDrinks = []
+    let promises = []
     const renderItem = ({ item }) => {
         return (
             <View>

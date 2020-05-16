@@ -3,7 +3,6 @@ import { View, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-nativ
 
 const SearchBar = (props) => {
     const [searchVal, changeSearchVal] = useState()
-
     return (
         <TouchableOpacity>
             <View style={styles.searchBarView}>
