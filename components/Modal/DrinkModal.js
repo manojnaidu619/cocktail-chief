@@ -17,15 +17,17 @@ const DrinkModal = (props) => {
         })
     }, [])
     
-    return (drinkInfo ? <DrinkInfo info={drinkInfo}/> : <Text style={styles.modalContainer}>loading!</Text>)
+    return (drinkInfo ? <DrinkInfo info={drinkInfo}/> : <Text style={styles.modalContainer}>loading...</Text>)
     
 }
 
 const styles = StyleSheet.create({
     modalContainer: {
-        flex: 1,
-        flexDirection: 'column',
-        alignItems: 'flex-start'
+        textAlign: 'center',
+        padding: 15,
+        marginTop: 250,
+        fontSize: 20,
+        fontWeight: 'bold'
     }
 })
 

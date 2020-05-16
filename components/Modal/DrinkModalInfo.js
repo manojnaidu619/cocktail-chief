@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
 
 const DrinkInfo = ({ info }) => {
     const [ingredients, setIngredients] = useState([])
@@ -18,31 +18,45 @@ const DrinkInfo = ({ info }) => {
     
     
     return (
-        <View style={styles.modalContainer}>
+        <ScrollView>
+            <View style={styles.modalContainer}>
             <View>
-                <Image source={{ uri: info['strDrinkThumb'] }} style={{ width: 400, height: 400 }}></Image>
+                <Image source={{ uri: info['strDrinkThumb'] }} style={styles.image}></Image>
             </View>
-            <Text>{info["strDrink"]}</Text>
-            <Text>Is it Alchoholic? : {info["strAlcoholic"] === 'Alcoholic' ? 'Yes' : "No"}</Text>
-            <Text>Category : {info["strCategory"]}</Text>
-            <Text>Glass : {info["strGlass"]}</Text>
-            <Text>Ingredients : </Text>
+            <Text style={{fontWeight: 'bold', fontSize: 27, marginBottom: 5, marginTop: 10}}>{info["strDrink"]}</Text>
+            <Text style={styles.textStyle}>Is it Alchoholic? : <Text style={{fontWeight: 'bold'}}>{info["strAlcoholic"] === 'Alcoholic' ? 'Yes' : "No"}</Text></Text>
+            <Text style={styles.textStyle}>Category : {info["strCategory"]}</Text>
+            <Text style={styles.textStyle}>Glass : {info["strGlass"]}</Text>
+            <Text style={{fontWeight: 'bold'}}>Ingredients : </Text>
             {
-                ingredients.map((ing, index) => <Text key={index}>{ing},</Text>)
-            }
-            <Text>{info["strInstructions"]}</Text>
-        </View>
+                ingredients.map((ing, index) => <Text key={index} style={{marginLeft: 15}}>{ing},</Text>)
+            }       
+            <Text style={{fontWeight: 'bold', marginTop: 10}}>Preparation : </Text>    
+            <Text style={styles.textStyle}>{info["strInstructions"]}</Text>
+            </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     modalContainer: {
-        display: 'flex',
+        fontFamily: "Cochin",
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
         padding: 10
+    },
+    textStyle: {
+        marginBottom: 10,
+        marginTop: 8,
+        fontSize: 15
+    },
+    image: {
+        width: 350,
+        height: 350,
+        marginLeft: 25,
+        marginRight: 25
     }
 })
 
