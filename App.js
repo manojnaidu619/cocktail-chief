@@ -15,11 +15,11 @@ const App = () => {
   const [modalStatus, setModalStatus] = useState(false)
   const [filterModal, setFilterModal] = useState(false)
   const [drinkId, setDrinkId] = useState(null)
-  const [filters, changeFilters] = useState(['Both','All'])
-
+  const [filters, changeFilters] = useState(['Both', 'All'])
+  
   const getSearchTerm = value => {
     if (value.toString().length > 0) {
-      requestHandler([null,null, value.toString()])
+      requestHandler([null, null, value.toString()])
     } else {
       requestHandler(filters)
     }
@@ -57,9 +57,7 @@ const App = () => {
     }))
   }
 
-  useEffect(() => {
-    requestHandler(filters)
-  }, [])
+  useEffect(() => {requestHandler(filters)}, [])
 
   return (
     <View style={styles.container}>
@@ -72,7 +70,7 @@ const App = () => {
       <Modal visible={filterModal}
         onRequestClose={() => setFilterModal(false)}
         animationType='slide-down'>
-        <Filter natureFilter={FilterNatureHandler} categoryFilter={FilterCategoryHandler} categorySelected={filters[1]} natureSelected={filters[0]}/>
+        <Filter natureFilter={FilterNatureHandler} categoryFilter={FilterCategoryHandler} categorySelected={filters[1]} natureSelected={filters[0]} />
       </Modal>
 
       <Modal visible={modalStatus}
