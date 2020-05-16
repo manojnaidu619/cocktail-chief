@@ -53,11 +53,11 @@ const App = () => {
       } else {
         setDrinks(Shuffler(reqOne))
       }
-      setLoading(false)
+      //setLoading(false)
     }))
   }
 
-  useEffect(() => {requestHandler(filters)}, [])
+  //useEffect(() => {requestHandler(filters)}, [])
 
   return (
     <View style={styles.container}>
@@ -65,7 +65,7 @@ const App = () => {
       {
         !loading ?
         (FlatListResolver(searchTerm, drinks, filters, pressHandler)) :
-        <Text>Loading data!</Text>
+        <Text style={styles.loader}>Loading drinks...</Text>
       }
       <Modal visible={filterModal}
         onRequestClose={() => setFilterModal(false)}
@@ -97,6 +97,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 5
+  },
+  loader: {
+    padding: 15,
+    marginTop: 250,
+    marginBottom: 250, 
+    textAlign: 'center',
+    fontSize: 25,
+    fontWeight: 'bold'
   }
 })
 
