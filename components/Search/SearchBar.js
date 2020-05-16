@@ -14,7 +14,7 @@ const SearchBar = (props) => {
                     returnKeyType="go"
                     onSubmitEditing={() => props.getSearchTerm(searchVal)}
                 />
-                <Text style={{marginLeft: 20}} onPress={() => props.filterModal()}>Filters</Text>
+                <Text style={styles.filterText} onPress={() => props.filterModal()}>Filters</Text>
             </View>
         </TouchableOpacity>
     )
@@ -25,14 +25,20 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-start',
     },
     inputField: {
-        borderBottomColor: '#ccc',
+        borderBottomColor: 'gray',
         borderBottomWidth: 2,
         padding: 5,
         width: '80%',
-        marginBottom: 30
+        marginBottom: 30,
+        color: 'gray'
+    },
+    filterText: {
+        margin: 10,
+        fontWeight: 'bold',
+        fontSize: 18
     }
 })
 

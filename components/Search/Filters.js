@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 const Filters = (props) => {
@@ -37,21 +37,41 @@ const Filters = (props) => {
     ]
 
     return (
-        <View>
-        <Text>Nature of Drink</Text>
+        <View style={styles.container}>
+        <Text style={styles.title}>Nature of Drink</Text>
+        <View style={styles.filterSection}>
           <RadioForm
-            radio_props={nature}
-            initial={natureSelected}
-            onPress={(value) => props.natureFilter(value)}
-            />
-            <Text>Category</Text>
-          <RadioForm
-            radio_props={category}
-            initial={categorySelected}
-            onPress={(value) => props.categoryFilter(value)}
+          radio_props={nature}
+          initial={natureSelected}
+          onPress={(value) => props.natureFilter(value)}
           />
+        </View>
+        <Text style={styles.title}>Category</Text>
+        <View style={styles.filterSection}>
+          <RadioForm
+          radio_props={category}
+          initial={categorySelected}
+          onPress={(value) => props.categoryFilter(value)}
+          />
+        </View>
+        <Text>(Info is auto saved on click)</Text>
         </View>
       );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 30
+  },
+  title: {
+      fontSize: 20,
+      fontWeight: 'bold'
+  },
+  filterSection: {
+    marginTop: 20,
+    marginBottom: 20, 
+    fontSize: 18
+  }
+})
 
 export default Filters

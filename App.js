@@ -53,11 +53,11 @@ const App = () => {
       } else {
         setDrinks(Shuffler(reqOne))
       }
-      //setLoading(false)
+      setLoading(false)
     }))
   }
 
-  //useEffect(() => {requestHandler(filters)}, [])
+  useEffect(() => {requestHandler(filters)}, [])
 
   return (
     <View style={styles.container}>
