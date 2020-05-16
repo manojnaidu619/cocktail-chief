@@ -2,15 +2,17 @@
 
 ## A friend of every cocktail lover
 
-A react native app which lists all the cocktails / mocktails ever made...
+A react native app which lists all the cocktails / mocktails ever made.
 
-![](images/loading.png)
+Here are some screenshots..
 
-![](images/home.png)
+<img src="images/loading.png" alt="loading-screen" height="600"/>
 
-![](images/search.png)
+<img src="images/home.png" alt="loading-screen" height="600"/>
 
-![](images/filters.png)
+<img src="images/search.png" alt="loading-screen" height="600"/>
 
-download[here](https://cocktail-chief-web.now.sh/)
+<img src="images/filters.png" alt="loading-screen" height="600"/>
+
+### download [here](https://cocktail-chief-web.now.sh/)
 
